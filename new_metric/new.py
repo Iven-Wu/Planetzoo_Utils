@@ -437,9 +437,9 @@ def compute_metric(resolution, b_min, b_max,mesh_gt,mesh_tar,
 if __name__ =='__main__':
 
     
-    res = pd.DataFrame(columns=('animal1', 'scale1','species1','animal2','scale2', 'species2','Score','GT','Recon','Inter'))
+    
 
-    res.to_csv('result.csv')
+    
     mesh_ori = '/media/ivenwu/My_Disk/video_obj_join/'
 
     
@@ -451,9 +451,15 @@ if __name__ =='__main__':
     
     # return
 
+    if not os.path.exists('result'):
+        os.makedirs('result')
     for i in range(len(animal_list)):
+        res = pd.DataFrame(columns=('animal1', 'scale1','species1','animal2','scale2', 'species2','Score','GT','Recon','Inter'))
+        res.to_csv('result/{}.csv'.format(animal_list[i]))
+
         for j in range(i,len(animal_list)):
 
+            
             # animal1 = 'african_elephant_female'
             # animal2 = 'bairds_tapir_juvenile'
             animal1 = animal_list[i]
@@ -476,7 +482,7 @@ if __name__ =='__main__':
             )
 
             res = res.append([tmp],ignore_index=True)
-            res.to_csv('result.csv',mode='a',header=False)
+            res.to_csv('result/{}.csv'.format(animal_list[i]),mode='a',header=False)
     # res.to_csv('result.csv')
     # with open('result.txt','w') as f:
 #     f.write(animal1+' '+animal2+' '+str(result['Score']))
