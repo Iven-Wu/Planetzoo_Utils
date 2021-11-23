@@ -453,16 +453,21 @@ if __name__ =='__main__':
 
     if not os.path.exists('result'):
         os.makedirs('result')
-    for i in range(len(animal_list)):
+    animal_list_set = ['african_elephant_female']
+    for i in range(len(animal_list_set)):
         res = pd.DataFrame(columns=('animal1', 'scale1','species1','animal2','scale2', 'species2','Score','GT','Recon','Inter'))
-        res.to_csv('result/{}.csv'.format(animal_list[i]))
+
+        animal1 = animal_list_set[i]
+
+        res.to_csv('result/{}.csv'.format(animal1))
 
         for j in range(i,len(animal_list)):
 
             
             # animal1 = 'african_elephant_female'
             # animal2 = 'bairds_tapir_juvenile'
-            animal1 = animal_list[i]
+            # animal1 = animal_list[i]
+            
             animal2 = animal_list[j]
             print('animal1: ',animal1)
             print('animal2: ',animal2)
@@ -482,7 +487,7 @@ if __name__ =='__main__':
             )
 
             res = res.append([tmp],ignore_index=True)
-            res.to_csv('result/{}.csv'.format(animal_list[i]),mode='a',header=False)
+            res.to_csv('result/{}.csv'.format(animal1),mode='a',header=False)
     # res.to_csv('result.csv')
     # with open('result.txt','w') as f:
 #     f.write(animal1+' '+animal2+' '+str(result['Score']))
