@@ -7,13 +7,19 @@ bias = np.load('/home/ivenwu/下载/RAFT-3D-master/bias.npy')
 max_value = 100
 min_value = 0
 
-count_array = np.zeros(10)
+split_length = 5
 
-name_list = [i*10 for i in range(10)]
+count_array = np.zeros(int(100/split_length))
+
+name_list = [i*split_length for i in range(int(100/split_length))]
+
+pp_list = []
 for value in bias:
-    index = int(value//10)
+    index = int(value//split_length)
     # bp(s)
     count_array[index] += 1
+
+    # pp_list.append()
 
 plt.bar(range(len(count_array)), count_array,fc='r',tick_label=name_list)
 
