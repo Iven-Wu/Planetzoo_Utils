@@ -9,7 +9,7 @@ def delete_thing(file_name):
                 w.write(l)
 
 if __name__ =='__main__':
-    folder_dir = '/media/ivenwu/My_Disk/video_join_large'
+    folder_dir = '/media/ivenwu/My_Disk/video_join_large/'
     for folder in tqdm(os.listdir(folder_dir)):
         for single_file in os.listdir(os.path.join(folder_dir,folder)):
             if '.obj' in single_file:
