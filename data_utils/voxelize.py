@@ -85,7 +85,7 @@ class Voxel():
 if __name__ =='__main__':
     vv = Voxel()
     # test_mesh = '/home/yuefanw/scratch/version1/african_elephant_female/frame_000001.obj'
-    root_dir = '/home/yuefanw/scratch/version1/'
+    root_dir = '/home/yuefanw/scratch/version1'
     # frame_list = glob.glob(os.path.join(root_dir,'*/*.obj'))
     # result = vv.get_voxel(test_mesh)
 
@@ -93,11 +93,14 @@ if __name__ =='__main__':
     if not os.path.exists(out_dir):
         os.makedirs(out_dir)
 
-    for animal in tqdm(os.listdir(root_dir)):
-        frame_list = glob.glob(os.path.join(root_dir,animal,'*.obj'))
-        for frame in frame_list:
-            result = vv.get_voxel(os.path.join(root_dir,animal,frame))
-            # pdb.set_trace()
-            np.save(os.path.join(out_dir,animal,frame.replace('obj','npy')),result)
+    # for animal in tqdm(os.listdir(root_dir)):
+    animal = 'dingo_male'
+    if not os.path.exists(os.path.join(out_dir,animal)):
+        os.makedirs(os.path.join(out_dir,animal))
+    frame_list = glob.glob(os.path.join(root_dir,animal,'*.obj'))
+    for frame in tqdm(frame_list):
+        result = vv.get_voxel(frame)
+        # pdb.set_trace()
+        np.save(os.path.join(out_dir,animal,frame.split('/')[-1].replace('obj','npy')),result)
 
     # pdb.set_trace()
